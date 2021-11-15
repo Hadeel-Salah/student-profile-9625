@@ -1,0 +1,19 @@
+ul{
+    list-style-type: none;
+
+}
+
+.student__name{
+    font-Weight: bold;
+    font-size: 33px;
+}
+
+.student__img{
+    height:100px;
+    border-radius: 50%;
+    position: relative;
+    float: left;
+    padding:5px;
+    border:1px solid black;
+
+} 
