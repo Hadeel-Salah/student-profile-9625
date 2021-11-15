@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Students from './Students';
+import Students from '../Students/Students';
+import './mainPage.css';
+import Search from '../SearchBox/Search';
 
 class StudentsList extends Component {
     constructor(props) {
@@ -21,7 +23,7 @@ class StudentsList extends Component {
        
         });
     }
-    searchHandler= event =>{
+    onSearchChange = event =>{
         this.setState({searchInput: event.target.value});
     }
 
@@ -38,17 +40,11 @@ class StudentsList extends Component {
         );
 
         return (
-            <div>
-                <form>
-                    <input
-                        type="text"
-                        placeholder="Search by the student name" 
-                        onChange={this.searchHandler}
-                        />
-                </form>
-
-                <Students students={filteredStudents} />
-                    
+            <div className="mainPage__container">
+                <div className="students__container">
+                    <Search onSearchChange={this.onSearchChange} />
+                    <Students students={filteredStudents} />
+                </div>
 
             </div>
         );

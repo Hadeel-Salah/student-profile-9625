@@ -1,9 +1,8 @@
-import './App.css';
-import StudentsList from './Components/layout/StudentsList';
+import StudentsList from './Components/layout/MainPage/StudentsList';
 
 function App() {
   return (
-    <StudentsList />
+      <StudentsList />
   );
 }
 

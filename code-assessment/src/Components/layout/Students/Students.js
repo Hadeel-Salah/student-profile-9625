@@ -1,10 +1,9 @@
 import React from 'react';
-import Student from './Student';
-
+import Student from '../Student/Student';
+import './students.css';
 
 const Students = props => (
-  <div className="allCards">
-
+  <div>
       {props.students.map(student => (
 
          <Student pic={student.pic} 
