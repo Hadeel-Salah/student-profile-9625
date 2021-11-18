@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import './student.css';
+import ExpandableList from '../ExpandableList/ExpandableList'
+import CalculateAverage from '../average/CalculateAverage';
 
 class Student extends Component {
     constructor(props){
         super(props);
+
+    this.state={
+        listExpandedOn: false,
     }
-
-    getAverage = (array)=>{
-        let sum=0,
-        average =0,
-        i = 0;
-
-        for(i; i < array.length;i++){
-            array[i] = parseInt(array[i]);
-            sum += array[i];
-            average = sum / 8;
-        }
-        return average;
+}
+    toggleShowList(){
+        this.setState({
+            listExpandedOn: !this.state.listExpandedOn,
+        })
+    }
+    toggleHideList(){
+        this.setState({
+            listExpandedOn: !this.state.listExpandedOn,
+        })
     }
     render(){
         return (
@@ -41,9 +44,30 @@ class Student extends Component {
                         </li>
 
                         <li>
-                            Average:{ this.getAverage(this.props.grades)}%
+                            <CalculateAverage props={this.props.grades} />
                         </li>
+                        { !this.state.listExpandedOn ?
+                            <li style={{float:"right", fontSize:"30px"}} onClick={ () => this.toggleShowList()}>
+                                <span>&#43;</span>
+                            </li>
+                            :
+                             <span style={{float:"right", fontSize:"30px"}} onClick={ () => this.toggleHideList()}>
+                                 &#8722;
+                            </span>
+                        }
+
+                        {this.state.listExpandedOn ? 
+                            <ExpandableList grades={this.props.grades} />
+                            : 
+                            <span>
+                                &nbsp;
+                            </span> }
                     </ul>
+                    
+                    <span>
+                        &nbsp;
+                    </span>
+
                     <hr></hr>
             </div>
         </div>

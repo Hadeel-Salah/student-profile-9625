@@ -9,7 +9,7 @@ class StudentsList extends Component {
         super(props);
         this.state ={
             students: [],
-            searchInput:''
+            searchInput:'',
         }
 
     }
