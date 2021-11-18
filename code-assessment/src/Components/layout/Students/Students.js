@@ -12,7 +12,8 @@ const Students = props => (
                   email={student.email}
                   company={student.company} 
                   skill={student.skill} 
-                  grades={student.grades} />
+                  grades={student.grades}
+                   />
       ))}
     </div>
   
