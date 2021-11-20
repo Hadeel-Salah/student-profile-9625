@@ -35,6 +35,7 @@ class Student extends Component {
 
 
     render(){
+
         return (
             <div className="student">
                 {this.props.students.map(student => (
