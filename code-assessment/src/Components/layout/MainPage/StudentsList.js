@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Students from '../Students/Students';
+import Student from '../Student/Student';
 import './mainPage.css';
 import SearchInput from '../Inputs/SearchInput';
 import TagInput from '../Inputs/TagInput';
@@ -11,7 +11,8 @@ class StudentsList extends Component {
         this.state ={
             students: [],
             searchInput:'',
-            searchTags:[],
+            searchTags:'',
+            
         }
 
     }
@@ -25,15 +26,17 @@ class StudentsList extends Component {
        
         });
     }
+
     NameSearchHandler = event =>{
         this.setState({searchInput: event.target.value});
     }
 
     TagSearchHandler = event =>{
         this.setState({searchTags: event.target.value});
+        
     }
+   
 
-    
 
     render() {
         const {searchInput, students} = this.state;
@@ -50,7 +53,10 @@ class StudentsList extends Component {
                 <div className="students__container">
                     <SearchInput NameSearchHandler={this.NameSearchHandler} />
                     <TagInput TagSearchHandler={this.TagSearchHandler} />
-                    <Students students={filteredStudents} />
+                    <Student
+                     students={filteredStudents} 
+                     > 
+                     </Student>
                 </div>
 
             </div>
