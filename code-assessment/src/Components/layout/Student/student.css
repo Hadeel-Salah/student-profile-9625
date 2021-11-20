@@ -21,3 +21,10 @@ ul{
 hr{
     background-color: rgb(230, 232, 235);
 }
+.new__tags {
+    display: inline-block;
+    margin: 2px;
+    padding: 5px;
+    border: 1px solid rgba(202, 202, 197, 0.897);
+    background-color: rgba(202, 202, 197, 0.897);
+  }
