@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 function calculateAverage(allGrades){
     let sum=0,
     average =0,
@@ -16,7 +14,7 @@ function calculateAverage(allGrades){
 function CalculateAverage(props) {
     return (
         <div>
-           Average: {calculateAverage(props.props)}%
+           Average: {calculateAverage(props.grades)}%
         </div>
     );
 }
