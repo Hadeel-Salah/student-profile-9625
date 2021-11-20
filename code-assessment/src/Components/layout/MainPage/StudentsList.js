@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Students from '../Students/Students';
 import './mainPage.css';
-import Search from '../SearchBox/Search';
+import SearchInput from '../Inputs/SearchInput';
+import TagInput from '../Inputs/TagInput';
 
 class StudentsList extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class StudentsList extends Component {
         this.state ={
             students: [],
             searchInput:'',
+            searchTags:[],
         }
 
     }
@@ -23,8 +25,12 @@ class StudentsList extends Component {
        
         });
     }
-    onSearchChange = event =>{
+    NameSearchHandler = event =>{
         this.setState({searchInput: event.target.value});
+    }
+
+    TagSearchHandler = event =>{
+        this.setState({searchTags: event.target.value});
     }
 
     
@@ -42,7 +48,8 @@ class StudentsList extends Component {
         return (
             <div className="mainPage__container">
                 <div className="students__container">
-                    <Search onSearchChange={this.onSearchChange} />
+                    <SearchInput NameSearchHandler={this.NameSearchHandler} />
+                    <TagInput TagSearchHandler={this.TagSearchHandler} />
                     <Students students={filteredStudents} />
                 </div>
 
