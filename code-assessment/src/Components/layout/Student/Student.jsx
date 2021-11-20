@@ -11,12 +11,12 @@ class Student extends Component {
         listExpandedOn: false,
     }
 }
-    toggleShowList(){
+    toggleShowList = () => {
         this.setState({
             listExpandedOn: !this.state.listExpandedOn,
         })
     }
-    toggleHideList(){
+    toggleHideList = () => {
         this.setState({
             listExpandedOn: !this.state.listExpandedOn,
         })
@@ -47,11 +47,11 @@ class Student extends Component {
                             <CalculateAverage props={this.props.grades} />
                         </li>
                         { !this.state.listExpandedOn ?
-                            <li style={{float:"right", fontSize:"30px"}} onClick={ () => this.toggleShowList()}>
+                            <li style={{float:"right", fontSize:"30px"}} onClick={this.toggleShowList}>
                                 <span>&#43;</span>
                             </li>
                             :
-                             <span style={{float:"right", fontSize:"30px"}} onClick={ () => this.toggleHideList()}>
+                             <span style={{float:"right", fontSize:"30px"}} onClick={this.toggleHideList}>
                                  &#8722;
                             </span>
                         }
