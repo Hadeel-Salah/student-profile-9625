@@ -9,6 +9,8 @@ class Student extends Component {
 
     this.state={
         listExpandedOn: false,
+        inputTags: [],
+        newTag:'',
     }
 }
     toggleShowList = () => {
@@ -21,30 +23,43 @@ class Student extends Component {
             listExpandedOn: !this.state.listExpandedOn,
         })
     }
+
+    onChangeTages = event =>{
+        this.setState({inputTags: event.target.value});
+    }
+    addTagsHandler = newTag =>{
+        let newTages = [...this.state.inputTags, newTag];
+        this.setState({inputTags: newTages});
+        
+    }
+
+
     render(){
+
         return (
             <div className="student">
+                {this.props.students.map(student => (
                 <div className="student__container">
-                    <img className="student__img" src={this.props.pic} alt="photo"></img>      
+                    <img className="student__img" src={student.pic} alt="photo"></img>      
                     <ul>
                         <li className="student__name">
-                            {this.props.firstName}{" "}{this.props.lastName}
+                            {student.firstName}{" "}{student.lastName}
                         </li>
 
                         <li>
-                            Email:{this.props.email}
+                            Email:{student.email}
                         </li>
 
                         <li>
-                            Company:{this.props.company}
+                            Company:{student.company}
                         </li>
 
                         <li>
-                            Skill: {this.props.skill}
+                            Skill: {student.skill}
                         </li>
 
                         <li>
-                            <CalculateAverage props={this.props.grades} />
+                            <CalculateAverage grades={student.grades} />
                         </li>
                         { !this.state.listExpandedOn ?
                             <li style={{float:"right", fontSize:"30px"}} onClick={this.toggleShowList}>
@@ -57,12 +72,35 @@ class Student extends Component {
                         }
 
                         {this.state.listExpandedOn ? 
-                            <ExpandableList grades={this.props.grades} />
+                            <ExpandableList grades={student.grades} />
                             : 
                             <span>
                                 &nbsp;
                             </span> }
+
+                        <li>
+                            {this.state.inputTags &&
+                                this.state.inputTags.map(tag =>
+                                    <li className="new__tags">{tag}</li>
+                                )}
+                        </li>
+
+                        <li>
+                            <input
+                             type="text"
+                             placeholder="enter tag"
+                             onChange={event => {this.setState({newTag: event.target.value})}}
+                             onKeyPress={event => {
+                                if (event.key === 'Enter') {
+                                  this.addTagsHandler(this.state.newTag);
+                                }
+                              }}
+
+                              />
+                        </li>
                     </ul>
+
+
                     
                     <span>
                         &nbsp;
@@ -70,6 +108,7 @@ class Student extends Component {
 
                     <hr></hr>
             </div>
+                 ))}
         </div>
         );
 

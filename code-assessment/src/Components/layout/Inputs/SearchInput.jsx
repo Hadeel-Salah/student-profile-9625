@@ -1,13 +1,13 @@
 import React from 'react';
 import "./style.css";
-const Search = props => (
+const SearchInput = props => (
     <form>
         <input
             type="text"
             placeholder="Search by name" 
-            onChange={props.onSearchChange}
+            onChange={props.NameSearchHandler}
             />
     </form>
   
 );
-export default Search;
+export default SearchInput;
