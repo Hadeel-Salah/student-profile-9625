@@ -9,18 +9,30 @@ class Student extends Component {
 
     this.state={
         listExpandedOn: false,
+        inputTags:[] ,
+        newTag:'',
     }
 }
-    toggleShowList(){
+    toggleShowList = () => {
         this.setState({
             listExpandedOn: !this.state.listExpandedOn,
         })
     }
-    toggleHideList(){
+    toggleHideList = () => {
         this.setState({
             listExpandedOn: !this.state.listExpandedOn,
         })
     }
+
+    onChangeTages = event =>{
+        this.setState({inputTags: event.target.value});
+    }
+    addTagsHandler = newTag => {
+        let newTages = [...this.state.inputTags, newTag];
+        this.setState({inputTags: newTages});
+    }
+
+
     render(){
         return (
             <div className="student">
@@ -47,11 +59,11 @@ class Student extends Component {
                             <CalculateAverage props={this.props.grades} />
                         </li>
                         { !this.state.listExpandedOn ?
-                            <li style={{float:"right", fontSize:"30px"}} onClick={ () => this.toggleShowList()}>
+                            <li style={{float:"right", fontSize:"30px"}} onClick={this.toggleShowList}>
                                 <span>&#43;</span>
                             </li>
                             :
-                             <span style={{float:"right", fontSize:"30px"}} onClick={ () => this.toggleHideList()}>
+                             <span style={{float:"right", fontSize:"30px"}} onClick={this.toggleHideList}>
                                  &#8722;
                             </span>
                         }
@@ -62,13 +74,29 @@ class Student extends Component {
                             <span>
                                 &nbsp;
                             </span> }
-                    </ul>
-                    
-                    <span>
-                        &nbsp;
-                    </span>
 
-                    <hr></hr>
+                        <li>
+                            {this.state.inputTags &&
+                                this.state.inputTags.map(tag =>
+                                    <li className="new__tags">{tag}</li>
+                                )}
+                        </li>
+
+                        <li>
+                            <input
+                             type="text"
+                             placeholder="enter tag"
+                             onChange={event => {this.setState({newTag: event.target.value})}}
+                             onKeyPress={event => {
+                                if (event.key === 'Enter') {
+                                  this.addTagsHandler(this.state.newTag);
+                                }
+                              }}
+
+                              />
+                        </li>
+                    </ul>
+                <hr></hr>
             </div>
         </div>
         );
