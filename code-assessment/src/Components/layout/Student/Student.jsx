@@ -10,7 +10,7 @@ class Student extends Component {
     this.state={
         listExpandedOn: false,
         inputTags: [],
-        newTag:'',
+        newTag:[],
     }
 }
     toggleShowList = () => {
@@ -24,22 +24,18 @@ class Student extends Component {
         })
     }
 
-    onChangeTages = event =>{
-        this.setState({inputTags: event.target.value});
+    typeChange = event =>{
+        this.setState({newTag: event.target.value});
     }
-    addTagsHandler = newTag =>{
-        let newTages = [...this.state.inputTags, newTag];
-        this.setState({inputTags: newTages});
-        
-    }
+   
+  
 
 
     render(){
-
         return (
             <div className="student">
                 {this.props.students.map(student => (
-                <div className="student__container">
+                <div id={student.id} className="student__container">
                     <img className="student__img" src={student.pic} alt="photo"></img>      
                     <ul>
                         <li className="student__name">
@@ -78,24 +74,22 @@ class Student extends Component {
                                 &nbsp;
                             </span> }
 
-                        <li>
-                            {this.state.inputTags &&
-                                this.state.inputTags.map(tag =>
-                                    <li className="new__tags">{tag}</li>
-                                )}
-                        </li>
-
+                            <li>
+                            {student.tags && student.tags.map(tag=> <li className="new__tags">{tag}</li>)}
+                            </li>
+                            
                         <li>
                             <input
                              type="text"
                              placeholder="enter tag"
-                             onChange={event => {this.setState({newTag: event.target.value})}}
+                             onChange={this.typeChange}
                              onKeyPress={event => {
                                 if (event.key === 'Enter') {
-                                  this.addTagsHandler(this.state.newTag);
-                                }
-                              }}
+                                   this.props.TagsInputHandler(this.state.newTag, student.id);
+                             }
+                            }}
 
+                             
                               />
                         </li>
                     </ul>
