@@ -11,7 +11,9 @@ class StudentsList extends Component {
         this.state ={
             students: [],
             searchInput:'',
-            searchTags:'',
+            tagInput: '',
+            Tags:[],
+            studentTags: [],
             
         }
 
@@ -19,12 +21,10 @@ class StudentsList extends Component {
 
   
     componentDidMount() {
-
         axios.get('https://hatchways.io/api/assessment/students')
         .then(response=>{
             this.setState({students:response.data.students});
-       
-        });
+        })
     }
 
     NameSearchHandler = event =>{
@@ -32,14 +32,31 @@ class StudentsList extends Component {
     }
 
     TagSearchHandler = event =>{
-        this.setState({searchTags: event.target.value});
+        this.setState({tagInput: event.target.value});
         
     }
+    UpddateTagHandler = newTags =>{
+        let allTags = [...this.state.Tags, newTags];
+        this.setState({ Tags: allTags})
+    }
+    TagsInputHandler = (tags, id) => {
+        let newTags = [...this.state.Tags, tags];
+        this.setState({Tags: newTags});
+        let student = this.state.students.filter(student => student.id === id);
+        let tagArray = [];
+        tagArray.push(tags);
+        student[0].tags = tagArray;
+        let studentTags = [...this.state.studentTags, student[0]];
+        let uniqueStudents = Array.from(new Set(studentTags));
+        this.setState({
+            studentTags: uniqueStudents
+        });
+    }
    
-
+    
 
     render() {
-        const {searchInput, students} = this.state;
+        const {searchInput, students, studentTags, tagInput} = this.state;
         const filteredStudents= students.filter(student => 
             student.firstName.toLowerCase().includes(searchInput.toLowerCase())
             ||
@@ -48,13 +65,24 @@ class StudentsList extends Component {
             !searchInput
         );
 
+        const filteredTags =  this.state.studentTags.map (student => {
+           if(student.tag)
+                for (let i = 0; i < student.tags.length; i++) {
+                    return student.tags[i].includes(this.state.tagInput) || !this.state.tagInput;
+    }
+    }
+        );
+    
+
         return (
             <div className="mainPage__container">
                 <div className="students__container">
                     <SearchInput NameSearchHandler={this.NameSearchHandler} />
                     <TagInput TagSearchHandler={this.TagSearchHandler} />
                     <Student
-                     students={filteredStudents} 
+                     students = {filteredStudents}
+                     TagsInputHandler={this.TagsInputHandler}
+                     
                      > 
                      </Student>
                 </div>
