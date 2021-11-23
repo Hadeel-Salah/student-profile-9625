@@ -11,9 +11,15 @@ class StudentsList extends Component {
         this.state ={
             students: [],
             searchInput:'',
+<<<<<<< Updated upstream
             tagInput: '',
             Tags:[],
             studentTags: [],
+=======
+            searchTags:'',
+            studentTags: [],
+            childrenTags: []
+>>>>>>> Stashed changes
             
         }
 
@@ -35,6 +41,7 @@ class StudentsList extends Component {
         this.setState({tagInput: event.target.value});
         
     }
+<<<<<<< Updated upstream
     UpddateTagHandler = newTags =>{
         let allTags = [...this.state.Tags, newTags];
         this.setState({ Tags: allTags})
@@ -46,11 +53,24 @@ class StudentsList extends Component {
         let tagArray = [];
         tagArray.push(tags);
         student[0].tags = tagArray;
+=======
+
+    TagsInputHandler = (tags, id) => {
+        let student = this.state.students.filter(student => student.id === id);
+        let tagArray = [];
+        tagArray.push(tags);
+        student[0].tags = tagArray; 
+>>>>>>> Stashed changes
         let studentTags = [...this.state.studentTags, student[0]];
         let uniqueStudents = Array.from(new Set(studentTags));
         this.setState({
             studentTags: uniqueStudents
+<<<<<<< Updated upstream
         });
+=======
+        });    
+
+>>>>>>> Stashed changes
     }
    
     
@@ -80,9 +100,14 @@ class StudentsList extends Component {
                     <SearchInput NameSearchHandler={this.NameSearchHandler} />
                     <TagInput TagSearchHandler={this.TagSearchHandler} />
                     <Student
+<<<<<<< Updated upstream
                      students = {filteredStudents}
                      TagsInputHandler={this.TagsInputHandler}
                      
+=======
+                        students={filteredStudents}
+                        sendInputHandler={this.TagsInputHandler} 
+>>>>>>> Stashed changes
                      > 
                      </Student>
                 </div>
