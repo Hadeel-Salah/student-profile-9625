@@ -24,8 +24,17 @@ class Student extends Component {
         })
     }
 
+<<<<<<< Updated upstream
     typeChange = event =>{
         this.setState({newTag: event.target.value});
+=======
+   
+    addTagsHandler = (newTag, id) =>{
+        let newTages = [...this.state.inputTags, newTag];
+        this.setState({inputTags: newTages});
+        this.props.sendInputHandler(this.state.inputTags, id)
+        
+>>>>>>> Stashed changes
     }
    
   
@@ -35,7 +44,12 @@ class Student extends Component {
         return (
             <div className="student">
                 {this.props.students.map(student => (
+<<<<<<< Updated upstream
                 <div id={student.id} className="student__container">
+=======
+                
+                <div className="student__container">
+>>>>>>> Stashed changes
                     <img className="student__img" src={student.pic} alt="photo"></img>      
                     <ul>
                         <li className="student__name">
@@ -74,10 +88,19 @@ class Student extends Component {
                                 &nbsp;
                             </span> }
 
+<<<<<<< Updated upstream
                             <li>
                             {student.tags && student.tags.map(tag=> <li className="new__tags">{tag}</li>)}
                             </li>
                             
+=======
+
+                            <li>
+                            {student.tags && student.tags.map(tag=> <li className="new__tags">{tag}</li>)}
+                            </li>
+
+
+>>>>>>> Stashed changes
                         <li>
                             <input
                              type="text"
@@ -85,9 +108,15 @@ class Student extends Component {
                              onChange={this.typeChange}
                              onKeyPress={event => {
                                 if (event.key === 'Enter') {
+<<<<<<< Updated upstream
                                    this.props.TagsInputHandler(this.state.newTag, student.id);
                              }
                             }}
+=======
+                                  this.props.sendInputHandler(this.state.newTag, student.id);
+                                }
+                              }}
+>>>>>>> Stashed changes
 
                              
                               />
